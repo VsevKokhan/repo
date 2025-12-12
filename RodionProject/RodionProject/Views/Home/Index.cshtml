@@ -1,0 +1,275 @@
+﻿@model List<RodionProject.Models.Promo>
+
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<!-- ========================================= -->
+<!-- HERO-блок (верхняя заставка)              -->
+<!-- ========================================= -->
+<header class="hero-section">
+    <div class="container py-5 d-flex flex-column flex-md-row align-items-center justify-content-center gap-4">
+
+        <!-- ЛОГО СЛЕВА -->
+        <img src="~/images/logo.png" class="hero-logo" alt="Логотип">
+
+        <!-- ТЕКСТ (как был) -->
+        <div class="text-center">
+            <h1 class="display-3">Всё везём</h1>
+            <p class="lead">
+                Надёжные перевозки с 2020 года.<br />
+                Ваш груз — наша забота.
+            </p>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- ========================================= -->
+<!-- Секция с акциями                          -->
+<!-- ========================================= -->
+<section class="promo-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Наши постоянно действующие предложения</h2>
+
+        <div class="row justify-content-center">
+
+            @foreach (var promo in Model)
+            {
+            <div class="col-12 col-sm-6 col-md-6 mb-4 d-flex justify-content-center">
+                <div class="promo-card" onclick="togglePromo(this)">
+
+                    <img src="@promo.ImageUrl" class="promo-img mb-3" />
+
+                    <p class="promo-item font-weight-bold">@promo.Text</p>
+
+                    <div class="promo-hover-text">
+                        @promo.Description
+                    </div>
+
+                </div>
+            </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ========================================= -->
+<!-- Калькулятор стоимости -->
+<!-- ========================================= -->
+<section class="calculator-section py-5">
+    <div class="container d-flex justify-content-end">
+        <div class="calculator-box">
+            <h3 class="text-center mb-3">Калькулятор стоимости</h3>
+            <form id="calculatorForm">
+
+                <!-- Выбор услуги -->
+                <div class="mb-3">
+                    <label class="form-label">Выберите услугу</label>
+                    <select class="form-select" id="serviceType" onchange="toggleServiceFields()">
+                        <option value="delivery" selected>Доставка</option>
+                        <option value="transport">Перевозка</option>
+                    </select>
+                </div>
+
+                <!-- Пункт отправления (для перевозки) -->
+                <div class="mb-3 d-none" id="pickupField">
+                    <label class="form-label">Пункт отправления</label>
+                    <input type="text" class="form-control" id="placeFrom" placeholder="Откуда едем?">
+                    <div class="invalid-feedback">Введите пункт отправления</div>
+                </div>
+
+                <!-- Место назначения -->
+                <div class="mb-3">
+                    <label class="form-label">Место назначения</label>
+                    <input type="text" class="form-control" id="placeTo" placeholder="Куда едем?">
+                    <div class="invalid-feedback">Введите место назначения</div>
+                </div>
+
+                <!-- Количество грузчиков -->
+                <div class="mb-3">
+                    <label class="form-label">Кол-во грузчиков</label>
+                    <input type="number" class="form-control" id="loaders" placeholder="Сколько человек потребуется?">
+                    <div class="invalid-feedback">Введите кол-во грузчиков</div>
+                </div>
+
+                <!-- Время работы грузчиков -->
+                <div class="mb-3">
+                    <label class="form-label">Время работы (часы)</label>
+                    <input type="number" class="form-control" id="hours" value="2" min="2" placeholder="Минимальный заказ от 2-х часов">
+                    <div class="invalid-feedback">Введите время работы (от 2 часов!)</div>
+                </div>
+
+                <!-- Тип машины -->
+                <div class="mb-3">
+                    <label class="form-label">Тип машины</label>
+                    <select class="form-select" id="carType">
+                        <option value="gazel" selected>Газель 1.5 т</option>
+                        <option value="fura">Фура</option>
+                        <option value="buk">Бычок 3.5 т</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-primary w-100" onclick="calculateCost()">Рассчитать</button>
+            </form>
+
+            <!-- Здесь появится кнопка Оставить заявку -->
+            <div id="requestButtonContainer" class="mt-3 text-center"></div>
+
+            <!-- Здесь будут введенные данные для подтверждения -->
+            <div id="orderPreview" class="mt-3 d-none"></div>
+
+            <div class="mt-3 text-center">
+                <h4>Результат: <span id="result">0</span></h4>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================================= -->
+<!-- ФУТЕР (ПОДВАЛ САЙТА)                      -->
+<!-- ========================================= -->
+<footer class="bg-dark text-white mt-5">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; @DateTime.Now.Year Всё везём. Надёжные перевозки.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p>Контакты: +7 777 77 77 | Email: info@vsevezem.ru | Avito: link</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function toggleServiceFields() {
+        const service = document.getElementById('serviceType').value;
+        const pickupField = document.getElementById('pickupField');
+        pickupField.classList.toggle('d-none', service !== 'transport');
+    }
+
+    function calculateCost() {
+        const service = document.getElementById('serviceType').value;
+        const placeFrom = document.getElementById('placeFrom');
+        const placeTo = document.getElementById('placeTo');
+        const loaders = document.getElementById('loaders');
+        const hours = document.getElementById('hours');
+        const carType = document.getElementById('carType');
+
+        let hasError = false;
+
+        // Валидация
+        if(service === 'transport' && placeFrom.value.trim() === "") {
+            placeFrom.classList.add("is-invalid");
+            hasError = true;
+        } else if(service === 'transport') {
+            placeFrom.classList.remove("is-invalid");
+        }
+
+        if(placeTo.value.trim() === "") {
+            placeTo.classList.add("is-invalid");
+            hasError = true;
+        } else {
+            placeTo.classList.remove("is-invalid");
+        }
+
+        if(isNaN(parseInt(loaders.value)) || parseInt(loaders.value) <= 0) {
+            loaders.classList.add("is-invalid");
+            hasError = true;
+        } else {
+            loaders.classList.remove("is-invalid");
+        }
+
+        if(isNaN(parseInt(hours.value)) || parseInt(hours.value) <= 1) {
+            hours.classList.add("is-invalid");
+            hasError = true;
+        } else {
+            hours.classList.remove("is-invalid");
+        }
+
+        if(carType.value.trim() === "") {
+            carType.classList.add("is-invalid");
+            hasError = true;
+        } else {
+            carType.classList.remove("is-invalid");
+        }
+
+        if(hasError) return;
+
+        // Склеивание значений
+        let resultText = "";
+        if(service === 'transport') resultText += placeFrom.value + " ";
+        resultText += placeTo.value + " " + loaders.value + " " + hours.value + " " + carType.value;
+        document.getElementById('result').innerText = resultText;
+
+        // Показываем кнопку "Оставить заявку"
+        const requestContainer = document.getElementById('requestButtonContainer');
+        requestContainer.innerHTML = `<button class="btn btn-success w-100" onclick="showOrderPreview()">Оставить заявку</button>`;
+    }
+
+    function showOrderPreview() {
+        const service = document.getElementById('serviceType').value;
+        const placeFrom = document.getElementById('placeFrom').value;
+        const placeTo = document.getElementById('placeTo').value;
+        const loaders = document.getElementById('loaders').value;
+        const hours = document.getElementById('hours').value;
+        const carType = document.getElementById('carType').value;
+
+        const isDelivery = service === 'delivery';
+
+        let previewHtml = `
+            <div class="card p-3 border mt-2">
+                <p><strong>Тип услуги:</strong> ${isDelivery ? 'Доставка' : 'Перевозка'}</p>
+                ${!isDelivery ? `<p><strong>Пункт отправления:</strong> ${placeFrom}</p>` : ''}
+                <p><strong>Пункт назначения:</strong> ${placeTo}</p>
+                <p><strong>Грузчики:</strong> ${loaders}</p>
+                <p><strong>Часы работы:</strong> ${hours}</p>
+                <p><strong>Тип машины:</strong> ${carType}</p>
+                <button class="btn btn-primary w-100 mt-2" onclick="submitOrder()">Подтвердить</button>
+            </div>
+        `;
+
+        const previewContainer = document.getElementById('orderPreview');
+        previewContainer.innerHTML = previewHtml;
+        previewContainer.classList.remove('d-none');
+    }
+
+    function submitOrder() {
+        const service = document.getElementById('serviceType').value;
+        const placeFrom = document.getElementById('placeFrom').value;
+        const placeTo = document.getElementById('placeTo').value;
+        const loaders = parseInt(document.getElementById('loaders').value);
+        const hours = parseInt(document.getElementById('hours').value);
+
+        const order = {
+            IsDelivery: service === 'delivery',
+            Departure: service === 'transport' ? placeFrom : null,
+            Destination: placeTo,
+            NumberOfWorkers: loaders,
+            Hours: hours
+        };
+
+        // Отправляем на сервер
+        fetch('http://localhost:5157/api/telegram', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(order)
+        })
+            .then(data => {
+                document.getElementById('orderPreview').classList.add('d-none');
+                document.getElementById('requestButtonContainer').innerHTML = '';
+                document.getElementById('calculatorForm').reset();
+                toggleServiceFields();
+            })
+            .catch(err => {
+                console.error(err);
+                alert(`❌ Ошибка при отправке заказа:\n${err.message}`);
+            });
+    }
+
+    toggleServiceFields();
+</script>

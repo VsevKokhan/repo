@@ -1,0 +1,134 @@
+/* ========================================= */
+/* Карточка акции                            */
+/* ========================================= */
+.promo-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  cursor: pointer;
+  transition: border 0.3s, box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent; /* по умолчанию рамка прозрачная */
+}
+
+/* Hover-эффект карточки */
+.promo-card:hover {
+  border: 2px solid #555; /* тёмно-серая рамка */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* лёгкая тень */
+  transform: translateY(-2px);
+}
+
+/* Картинка фиксированная и ровная */
+.promo-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover-эффект карточки */
+.promo-card:hover {
+  border: 2px solid #aaa; /* светло-серая рамка */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* лёгкая тень */
+  transform: translateY(-2px);
+}
+
+/* Лёгкий zoom картинки при hover */
+.promo-card:hover .promo-img {
+  transform: scale(1.02); /* чуть меньше увеличения для более мягкого эффекта */
+}
+
+/* Текст акции всегда видимый */
+.promo-item {
+  color: #ffc107; /* основной текст яркий жёлтый */
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+/* ========================================= */
+/* Скрытый текст под карточкой (описание)   */
+/* ========================================= */
+.promo-hover-text {
+  background: transparent; /* прозрачный фон */
+  color: #000;              /* текст черный */
+  padding: 15px 0;
+  margin-top: 10px;
+  border-radius: 10px;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  text-align: center;
+}
+
+/* Появление текста только при клике (active) */
+.promo-card.active .promo-hover-text {
+  max-height: 200px;
+  opacity: 1;
+}
+
+/* ========================================= */
+/* Калькулятор, ошибки, инпуты и прочее     */
+/* ========================================= */
+.calculator-box {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  max-width: 380px;
+}
+
+.calculator-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-logo {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  background: black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.invalid-feedback {
+  color: #ff4d4f;
+  font-weight: 500;
+  font-size: 0.85rem;
+  background: rgba(255, 77, 79, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+}
+
+input.is-invalid ~ .invalid-feedback,
+select.is-invalid ~ .invalid-feedback {
+  opacity: 1;
+  max-height: 100px;
+}
+
+/* Убираем стрелочки в Chrome, Edge и Firefox */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
