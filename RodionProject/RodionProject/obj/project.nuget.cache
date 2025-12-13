@@ -1,15 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GjlIThDzGGw=",
+  "dgSpecHash": "BzK/Y+XW7KGaq1jLcDyLlEtvnmFK9Vin4VGs6JR3pwgJgJVD/4EdcqGlAwaPKVl+JC/xvaXkDDxoBR2xMp17Jw==",
   "success": true,
-  "projectFilePath": "C:\\мусор\\testik\\RodionProject\\RodionProject\\RodionProject.csproj",
+  "projectFilePath": "C:\\мусор\\p\\RodionProject\\RodionProject\\RodionProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sevak\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\sevak\\.nuget\\packages\\telegram.bot\\19.0.0\\telegram.bot.19.0.0.nupkg.sha512",
-    "C:\\Users\\sevak\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.16\\microsoft.netcore.app.ref.8.0.16.nupkg.sha512",
-    "C:\\Users\\sevak\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.16\\microsoft.windowsdesktop.app.ref.8.0.16.nupkg.sha512",
-    "C:\\Users\\sevak\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.16\\microsoft.aspnetcore.app.ref.8.0.16.nupkg.sha512",
-    "C:\\Users\\sevak\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.16\\microsoft.netcore.app.host.win-x64.8.0.16.nupkg.sha512"
+    "C:\\Users\\sevak\\.nuget\\packages\\telegram.bot\\19.0.0\\telegram.bot.19.0.0.nupkg.sha512"
   ],
   "logs": []
 }

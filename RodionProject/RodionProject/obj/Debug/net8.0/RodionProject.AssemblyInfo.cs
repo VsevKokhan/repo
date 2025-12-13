@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RodionProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4cb8b650db540e5cb14ee33bb77a38a76dfe94b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0514dc4ebf4c9343f2a022dd9a7333a4382a612")]
 [assembly: System.Reflection.AssemblyProductAttribute("RodionProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RodionProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

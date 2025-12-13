@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\мусор\\testik\\RodionProject\\RodionProject\\RodionProject.csproj": {}
+    "C:\\мусор\\p\\RodionProject\\RodionProject\\RodionProject.csproj": {}
   },
   "projects": {
-    "C:\\мусор\\testik\\RodionProject\\RodionProject\\RodionProject.csproj": {
+    "C:\\мусор\\p\\RodionProject\\RodionProject\\RodionProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\мусор\\testik\\RodionProject\\RodionProject\\RodionProject.csproj",
+        "projectUniqueName": "C:\\мусор\\p\\RodionProject\\RodionProject\\RodionProject.csproj",
         "projectName": "RodionProject",
-        "projectPath": "C:\\мусор\\testik\\RodionProject\\RodionProject\\RodionProject.csproj",
+        "projectPath": "C:\\мусор\\p\\RodionProject\\RodionProject\\RodionProject.csproj",
         "packagesPath": "C:\\Users\\sevak\\.nuget\\packages\\",
-        "outputPath": "C:\\мусор\\testik\\RodionProject\\RodionProject\\obj\\",
+        "outputPath": "C:\\мусор\\p\\RodionProject\\RodionProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -66,24 +66,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -92,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
