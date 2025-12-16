@@ -4,28 +4,39 @@
     ViewData["Title"] = "Главная";
 }
 
-<!-- ========================================= -->
-<!-- HERO-блок (верхняя заставка)              -->
-<!-- ========================================= -->
-<header class="hero-section">
-    <div class="container py-5 d-flex flex-column flex-md-row align-items-center justify-content-center gap-4">
+<!-- Фиксированная шапка -->
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <div class="container d-flex align-items-center justify-content-between">
 
-        <!-- ЛОГО СЛЕВА -->
-        <img src="~/images/logo.png" class="hero-logo" alt="Логотип">
+        <!-- ЛЕВАЯ ЧАСТЬ -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="~/images/logo.png" alt="Логотип" class="navbar-logo">
+            <span class="ms-2 fw-bold brand-text">Всё везём</span>
+        </a>
 
-        <!-- ТЕКСТ (как был) -->
-        <div class="text-center">
-            <h1 class="display-3">Всё везём</h1>
-            <p class="lead">
-                Надёжные перевозки с 2020 года.<br />
-                Ваш груз — наша забота.
-            </p>
+        <!-- ПРАВАЯ ЧАСТЬ (ПОЯВЛЯЕТСЯ ПРИ СКРОЛЛЕ) -->
+        <div class="navbar-contacts">
+            Контакты: <strong>+7 777 77 77</strong>
         </div>
 
     </div>
+</nav>
+
+<!-- Hero (остается без изменений) -->
+<header class="hero-section">
+    <div class="hero-content">
+
+        <img src="~/images/logo.png" alt="Логотип" class="hero-logo-main">
+
+        <h1 class="hero-title">Всё везём</h1>
+
+        <p class="hero-subtitle">
+            Надёжные перевозки с 2020 года.<br />
+            Ваш груз — наша забота.
+        </p>
+
+    </div>
 </header>
-
-
 <!-- ========================================= -->
 <!-- Секция с акциями                          -->
 <!-- ========================================= -->
@@ -272,4 +283,27 @@
     }
 
     toggleServiceFields();
+
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.custom-navbar');
+        const hero = document.querySelector('.hero-section');
+        if (!navbar || !hero) return;
+
+        const scrolled = window.scrollY > 80;
+
+        // Появление navbar только после прокрутки
+        if (scrolled) {
+            navbar.style.opacity = '1';
+            navbar.style.pointerEvents = 'auto';
+            navbar.style.transform = 'translateY(0)';
+        } else {
+            navbar.style.opacity = '0';
+            navbar.style.pointerEvents = 'none';
+            navbar.style.transform = 'translateY(-100%)';
+        }
+
+        navbar.classList.toggle('navbar-scrolled', scrolled);
+        hero.classList.toggle('hero-hidden', scrolled);
+    });
+
 </script>

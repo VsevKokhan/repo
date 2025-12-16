@@ -1,134 +1,275 @@
 /* ========================================= */
-/* Карточка акции                            */
+/* RESET / BASE                              */
 /* ========================================= */
+
+body {
+    margin: 0;
+    padding-top: 80px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+    background: #f8f9fa;
+    color: #000;
+}
+
+/* ========================================= */
+/* GLASS NAVBAR                              */
+/* ========================================= */
+
+.custom-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transition: height 0.25s ease, background 0.25s ease;
+}
+
+    .custom-navbar .container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+/* Logo */
+.navbar-logo {
+    height: 65px;
+    width: auto;
+    transition: height 0.25s ease;
+}
+
+/* Brand text */
+.brand-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000; /* 🔥 ЧЁРНЫЙ, НЕ СИНИЙ */
+    transition: font-size 0.25s ease, transform 0.25s ease;
+}
+
+/* Скрываем весь navbar изначально */
+.custom-navbar {
+    opacity: 0; /* полностью невидим */
+    pointer-events: none; /* нельзя кликнуть по невидимому navbar */
+    transform: translateY(-100%); /* уводим вверх за экран */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+/* Скрываем лого и текст бренда в начале */
+.custom-navbar .navbar-logo,
+.custom-navbar .brand-text {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Contacts (hidden initially) */
+.navbar-contacts {
+    font-size: 0.95rem;
+    color: #000;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Navbar scrolled state */
+.navbar-scrolled {
+    height: 60px;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+    .navbar-scrolled .navbar-logo {
+        height: 42px;
+    }
+
+    .navbar-scrolled .brand-text {
+        font-size: 0.95rem;
+        transform: translateY(-1px);
+    }
+
+    .navbar-scrolled .navbar-contacts {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    .navbar-scrolled .navbar-logo,
+    .navbar-scrolled .brand-text {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* ========================================= */
+/* HERO SECTION                              */
+/* ========================================= */
+
+.hero-section {
+    min-height: 60vh; /* 🔥 НЕ НА ВСЮ СТРАНИЦУ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: min-height 0.4s ease;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* ЛОГО В HERO */
+.hero-logo-main {
+    height: 130px;
+    width: auto;
+    opacity: 0.9;
+}
+
+/* ЗАГОЛОВОК */
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* ПОДЗАГОЛОВОК */
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* СОСТОЯНИЕ ПРИ СКРОЛЛЕ */
+.hero-hidden .hero-content {
+    opacity: 0;
+    transform: translateY(-60px);
+    pointer-events: none;
+}
+
+/* HERO СЖИМАЕТСЯ ПРИ СКРОЛЛЕ */
+.hero-hidden {
+    min-height: 20vh;
+}
+
+/* ========================================= */
+/* PROMO CARDS                               */
+/* ========================================= */
+
 .promo-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  cursor: pointer;
-  transition: border 0.3s, box-shadow 0.3s, transform 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  position: relative;
-  overflow: hidden;
-  border: 2px solid transparent; /* по умолчанию рамка прозрачная */
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    cursor: pointer;
+    transition: border 0.3s, box-shadow 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
 }
 
-/* Hover-эффект карточки */
-.promo-card:hover {
-  border: 2px solid #555; /* тёмно-серая рамка */
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* лёгкая тень */
-  transform: translateY(-2px);
-}
+    .promo-card:hover {
+        border: 2px solid #aaa;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
 
-/* Картинка фиксированная и ровная */
 .promo-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
-/* Hover-эффект карточки */
-.promo-card:hover {
-  border: 2px solid #aaa; /* светло-серая рамка */
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* лёгкая тень */
-  transform: translateY(-2px);
-}
-
-/* Лёгкий zoom картинки при hover */
 .promo-card:hover .promo-img {
-  transform: scale(1.02); /* чуть меньше увеличения для более мягкого эффекта */
+    transform: scale(1.02);
 }
 
-/* Текст акции всегда видимый */
 .promo-item {
-  color: #ffc107; /* основной текст яркий жёлтый */
-  font-size: 1.1rem;
-  font-weight: 700;
-  transition: color 0.3s ease;
+    color: #ffc107;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
-/* ========================================= */
-/* Скрытый текст под карточкой (описание)   */
-/* ========================================= */
+/* Promo description */
 .promo-hover-text {
-  background: transparent; /* прозрачный фон */
-  color: #000;              /* текст черный */
-  padding: 15px 0;
-  margin-top: 10px;
-  border-radius: 10px;
-
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-  text-align: center;
+    background: transparent;
+    color: #000;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-radius: 10px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-/* Появление текста только при клике (active) */
 .promo-card.active .promo-hover-text {
-  max-height: 200px;
-  opacity: 1;
+    max-height: 200px;
+    opacity: 1;
 }
 
 /* ========================================= */
-/* Калькулятор, ошибки, инпуты и прочее     */
+/* CALCULATOR                                */
 /* ========================================= */
+
 .calculator-box {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  max-width: 380px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    max-width: 380px;
 }
 
 .calculator-section {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.hero-logo {
-  height: 90px;
-  width: auto;
-  object-fit: contain;
-  background: black;
-  padding: 10px;
-  border-radius: 10px;
-}
+/* ========================================= */
+/* FORMS & ERRORS                            */
+/* ========================================= */
 
 .invalid-feedback {
-  color: #ff4d4f;
-  font-weight: 500;
-  font-size: 0.85rem;
-  background: rgba(255, 77, 79, 0.05);
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-top: 4px;
-
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: opacity 0.4s ease, max-height 0.4s ease;
+    color: #ff4d4f;
+    font-weight: 500;
+    font-size: 0.85rem;
+    background: rgba(255, 77, 79, 0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
 }
 
 input.is-invalid ~ .invalid-feedback,
 select.is-invalid ~ .invalid-feedback {
-  opacity: 1;
-  max-height: 100px;
+    opacity: 1;
+    max-height: 100px;
 }
 
-/* Убираем стрелочки в Chrome, Edge и Firefox */
+/* ========================================= */
+/* INPUT CLEANUP                             */
+/* ========================================= */
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
