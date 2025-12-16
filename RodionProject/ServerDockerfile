@@ -12,26 +12,27 @@ ENV ASPNETCORE_URLS=http://+:5000
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 
-# Устанавливаем рабочую папку
 WORKDIR /src
 
-# Копируем только csproj и восстанавливаем зависимости (кэшируем слои)
-COPY ["RodionProject/RodionProject.csproj", "RodionProject/"]
-RUN dotnet restore "RodionProject/RodionProject.csproj"
-
-# Переключаемся в папку проекта и копируем остальные файлы
+# Копируем только csproj для кэширования restore
+COPY RodionProject/RodionProject.csproj ./RodionProject/
 WORKDIR /src/RodionProject
+
+# Восстанавливаем зависимости с подробным логом
+RUN dotnet restore "RodionProject.csproj" --verbosity detailed
+
+# Копируем остальные файлы проекта
 COPY RodionProject/. .
 
-# Сборка проекта
-RUN dotnet build "RodionProject.csproj" -c $BUILD_CONFIGURATION -o ./build
+# Сборка проекта с подробным логом
+RUN dotnet build "RodionProject.csproj" -c $BUILD_CONFIGURATION -o ./build --verbosity detailed
 
 # ==============================
 # Publish stage
 # ==============================
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "RodionProject.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "RodionProject.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --verbosity detailed
 
 # ==============================
 # Final image
