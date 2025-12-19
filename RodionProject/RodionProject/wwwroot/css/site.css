@@ -21,15 +21,16 @@ body {
     height: 80px;
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.45);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.45);
+    border-bottom: 1px solid rgba(255,255,255,0.35);
     display: flex;
     align-items: center;
     z-index: 1000;
-    transition: height 0.25s ease, background 0.25s ease;
+    transition: all 0.35s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
 }
-
     .custom-navbar .container {
         height: 100%;
         display: flex;
@@ -163,24 +164,22 @@ body {
 /* ========================================= */
 
 .promo-card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    width: 100%;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px) saturate(180%);
+    border-radius: 20px;
+    padding: 25px;
     max-width: 400px;
     text-align: center;
     cursor: pointer;
-    transition: border 0.3s, box-shadow 0.3s, transform 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     position: relative;
     overflow: hidden;
-    border: 2px solid transparent;
 }
 
     .promo-card:hover {
-        border: 2px solid #aaa;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        transform: translateY(-2px);
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 14px 30px rgba(0,0,0,0.15);
     }
 
 .promo-img {
@@ -236,24 +235,25 @@ body {
     justify-content: flex-end;
 }
 
+
+
 /* ========================================= */
 /* FORMS & ERRORS                            */
 /* ========================================= */
 
 .invalid-feedback {
-    color: #ff4d4f;
-    font-weight: 500;
-    font-size: 0.85rem;
-    background: rgba(255, 77, 79, 0.05);
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-top: 4px;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: opacity 0.4s ease, max-height 0.4s ease;
+    color: #ff4d4f; /* ярко-красный цвет текста ошибки */
+    font-weight: 500; /* чуть жирнее обычного */
+    font-size: 0.85rem; /* мелкий текст */
+    background: rgba(255, 77, 79, 0.05); /* очень светлый красный фон (почти прозрачный) */
+    padding: 4px 8px; /* внутренние отступы */
+    border-radius: 4px; /* скругление углов */
+    margin-top: 4px; /* расстояние от поля ввода */
+    max-height: 0; /* скрываем элемент по высоте */
+    opacity: 0; /* элемент невидим */
+    overflow: hidden; /* обрезаем содержимое, когда скрыт */
+    transition: opacity 0.4s ease, max-height 0.4s ease; /* плавное появление */
 }
-
 input.is-invalid ~ .invalid-feedback,
 select.is-invalid ~ .invalid-feedback {
     opacity: 1;
@@ -273,3 +273,156 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+/* ========================================= */
+/* SERVICES FULL WIDTH (LIKE PHOTO)          */
+/* ========================================= */
+
+.services-section {
+    width: 100%;
+    padding: 60px 0;
+    background: #ffffff;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.services-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.services-tabs {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    background: #e5e7eb; /* серая плашка */
+    border-radius: 999px;
+    margin-bottom: 48px;
+}
+
+    .services-tabs button {
+        position: relative;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        padding: 8px 16px;
+        font-weight: 600;
+        color: #374151;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+        .services-tabs button.active {
+            color: #111827;
+            cursor: default;
+        }
+        .services-tabs button:hover:not(.active) {
+            color: #111827; /* чуть темнее при ховере */
+        }
+        .services-tabs button::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 999px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 0;
+        }
+
+        .services-tabs button:hover:not(.active)::before {
+            opacity: 1;
+        }
+
+.tabs-slider {
+    position: absolute;
+    inset: 6px;
+    left: 4px;
+    background: #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, width 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.service-card {
+    background: rgba(250, 250, 250, 0.95); /* почти белый с лёгким серым */
+    border-radius: 20px;
+    border: 1px solid rgba(200, 200, 200, 0.7); /* чуть отчетливая рамка */
+    padding: 25px;
+    max-width: 400px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* мягкая тень */
+    transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+}
+
+    .service-card:hover {
+        transform: translateY(-4px) scale(1.015); /* лёгкий подъём */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* немного сильнее тень */
+        background: rgba(240, 240, 240, 0.95); /* слегка темнее при hover */
+        border-color: rgba(180, 180, 180, 0.9); /* рамка чуть темнее при hover */
+    }
+
+    .service-card h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+
+    .service-card ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 24px;
+    }
+
+    .service-card li {
+        position: relative;
+        padding-left: 22px;
+        margin-bottom: 10px;
+    }
+
+        .service-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #9ca3af;
+            font-weight: 700;
+        }
+
+.service-price {
+    border: 1px solid #d1d5db;
+    color: #374151;
+    background: #f9fafb;
+}
+
+.service-price-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    background-color: #ffc107; /* желтая кнопка */
+    color: #111;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+    .service-price-btn:hover {
+        background-color: #e6ac00; /* чуть темнее при ховере */
+        transform: translateY(-2px);
+    }

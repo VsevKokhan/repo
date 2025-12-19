@@ -38,6 +38,119 @@
     </div>
 </header>
 <!-- ========================================= -->
+<!-- SERVICES GLASS BLOCK                     -->
+<!-- ========================================= -->
+<section class="services-section">
+    <div class="services-container">
+
+        <h2 class="services-title">Наши популярные услуги</h2>
+
+        <div class="services-tabs">
+            <div class="tabs-slider"></div>
+
+            <button class="active" data-tab="auto">Авто с грузчиками</button>
+            <button data-tab="workers">Грузчики и рабочие</button>
+            <button data-tab="transport">Аренда авто</button>
+        </div>
+        <div class="services-grid" data-content="auto">
+
+            <div class="service-card">
+                <h4>Переезды</h4>
+                <ul>
+                    <li>любой объем</li>
+                    <li>подъем на этаж бесплатно</li>
+                    <li>сборка/разборка мебели</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+            <div class="service-card">
+                <h4>Перевозки</h4>
+                <ul>
+                    <li>такелажные работы</li>
+                    <li>любой сложности</li>
+                    <li>быстро и аккуратно</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+            <div class="service-card">
+                <h4>Ваша задача</h4>
+                <ul>
+                    <li>подберем машину нужного объема</li>
+                    <li>большой штаб грузчиков</li>
+                    <li>скидки за большой объем</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+        </div>
+
+        <div class="services-grid d-none" data-content="workers">
+
+            <div class="service-card">
+                <h4>Услуги грузчиков</h4>
+                <ul>
+                    <li>опытные русские парни</li>
+                    <li>штаб более 300 чел.</li>
+                    <li>на час или на день</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+            <div class="service-card">
+                <h4>Услуги разнорабочих</h4>
+                <ul>
+                    <li>помощь на вашем объекте</li>
+                    <li>на час или постоянную основу</li>
+                    <li>любые задачи</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+            
+        </div>
+
+        <div class="services-grid d-none" data-content="transport">
+
+            <div class="service-card">
+                <h4>Грузовик закрытый</h4>
+                <ul>
+                    <li>от 1.5 до 10 тонн</li>
+                    <li>от 6 до 40 куб.м.</li>
+                    <li>чистый мебельный кузов</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+            <div class="service-card">
+                <h4>Грузовик открытый</h4>
+                <ul>
+                    <li>от 1.5 до 10 тонн</li>
+                    <li>есть самосвалы</li>
+                    <li>для сыпучих материалов</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+            <div class="service-card">
+                <h4>Манипулятор</h4>
+                <ul>
+                    <li>от 3 до 10 тонн</li>
+                    <li>стрела от 6 до 18 м</li>
+                    <li>открытый кузов</li>
+                </ul>
+                <button class="service-price-btn">ОТ 1500 ₽</button>
+            </div>
+
+        </div>
+
+        
+        
+    </div>
+</section>
+
+<!-- ========================================= -->
 <!-- Секция с акциями                          -->
 <!-- ========================================= -->
 <section class="promo-section py-5">
@@ -305,5 +418,42 @@
         navbar.classList.toggle('navbar-scrolled', scrolled);
         hero.classList.toggle('hero-hidden', scrolled);
     });
+
+    const tabs = document.querySelectorAll('.services-tabs button');
+    const slider = document.querySelector('.tabs-slider');
+
+    function moveSlider(button) {
+        const rect = button.getBoundingClientRect();
+        const parentRect = button.parentElement.getBoundingClientRect();
+
+        const horizontalPadding = 12;
+        slider.style.width = (rect.width - horizontalPadding) + 'px';
+        slider.style.transform =
+            `translateX(${rect.left - parentRect.left}px)`;
+    }
+
+    // Инициализация при загрузке
+    const activeButton = document.querySelector('.services-tabs button.active');
+    if (activeButton) moveSlider(activeButton);
+
+    tabs.forEach(button => {
+        button.addEventListener('click', () => {
+
+            tabs.forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+
+            moveSlider(button);
+
+            const tab = button.dataset.tab;
+
+            document.querySelectorAll('.services-grid').forEach(grid => {
+                grid.classList.toggle(
+                    'd-none',
+                    grid.dataset.content !== tab
+                );
+            });
+        });
+    });
+              
 
 </script>
