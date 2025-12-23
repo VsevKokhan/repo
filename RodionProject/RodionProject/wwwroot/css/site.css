@@ -106,16 +106,19 @@ body {
     }
 
 /* ========================================= */
-/* HERO SECTION                              */
+/* HERO SECTION — остаётся неизменным       */
 /* ========================================= */
 
-.hero-section {
-    min-height: 60vh; /* 🔥 НЕ НА ВСЮ СТРАНИЦУ */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: min-height 0.4s ease;
+.hero-section.hero-photo {
+    position: relative;
+    height: 65vh;
+    min-height: 460px;
+    overflow: hidden;
+    background-image: url("/images/workerback.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% center;
+    transition: height 0.45s ease; /* оставляем плавность */
 }
 
 .hero-content {
@@ -147,76 +150,19 @@ body {
     line-height: 1.5;
 }
 
-/* СОСТОЯНИЕ ПРИ СКРОЛЛЕ */
-.hero-hidden .hero-content {
-    opacity: 0;
-    transform: translateY(-60px);
-    pointer-events: none;
-}
-
-/* HERO СЖИМАЕТСЯ ПРИ СКРОЛЛЕ */
+/* Убираем сжатие и затемнение при скролле */
 .hero-hidden {
-    min-height: 20vh;
-}
-
-/* ========================================= */
-/* PROMO CARDS                               */
-/* ========================================= */
-
-.promo-card {
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(12px) saturate(180%);
-    border-radius: 20px;
-    padding: 25px;
-    max-width: 400px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-    .promo-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 14px 30px rgba(0,0,0,0.15);
-    }
-
-.promo-img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-}
-
-.promo-card:hover .promo-img {
-    transform: scale(1.02);
-}
-
-.promo-item {
-    color: #ffc107;
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-
-/* Promo description */
-.promo-hover-text {
-    background: transparent;
-    color: #000;
-    padding: 15px 0;
-    margin-top: 10px;
-    border-radius: 10px;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
-}
-
-.promo-card.active .promo-hover-text {
-    max-height: 200px;
+    /* теперь ничего не делаем — хиро всегда видно */
+    min-height: 65vh; /* можно оставить для гарантии */
     opacity: 1;
+    transition: none;
 }
+
+    .hero-hidden .hero-content {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 
 /* ========================================= */
 /* CALCULATOR                                */
@@ -279,9 +225,11 @@ input[type=number] {
 /* ========================================= */
 
 .services-section {
-    width: 100%;
-    padding: 60px 0;
+    position: relative;
+    margin-top: -90px; /* 🔥 перекрытие hero */
+    padding-top: 90px;
     background: #ffffff;
+    border-radius: 28px 28px 0 0;
 }
 
 .services-container {
@@ -358,24 +306,34 @@ input[type=number] {
     gap: 24px;
 }
 
+
+.promo-overlay {
+    position: absolute;
+    inset: 0; /* растягиваем overlay на всю карточку */
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px) saturate(115%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 20px; /* немного внутреннего отступа для текста */
+    border-radius: 20px; /* скругление совпадает с картинкой */
+}
+/* ========================================= */
+/* ОБЩИЕ КАРТОЧКИ УСЛУГ                     */
+/* ========================================= */
 .service-card {
-    background: rgba(250, 250, 250, 0.95); /* почти белый с лёгким серым */
+    background: #fafafa; /* почти белый с лёгким серым */
     border-radius: 20px;
-    border: 1px solid rgba(200, 200, 200, 0.7); /* чуть отчетливая рамка */
+    border: 1px solid rgba(200, 200, 200, 0.7); /* лёгкая рамка */
     padding: 25px;
-    max-width: 400px;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* мягкая тень */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+    overflow: hidden;
 }
-
-    .service-card:hover {
-        transform: translateY(-4px) scale(1.015); /* лёгкий подъём */
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* немного сильнее тень */
-        background: rgba(240, 240, 240, 0.95); /* слегка темнее при hover */
-        border-color: rgba(180, 180, 180, 0.9); /* рамка чуть темнее при hover */
-    }
 
     .service-card h4 {
         font-size: 1.2rem;
@@ -386,7 +344,7 @@ input[type=number] {
     .service-card ul {
         list-style: none;
         padding: 0;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     .service-card li {
@@ -403,6 +361,70 @@ input[type=number] {
             font-weight: 700;
         }
 
+    .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+
+    /* ========================================= */
+    /* ПРОМО-КАРТОЧКИ                            */
+    /* ========================================= */
+
+    /* ПРОМО-КАРТОЧКИ */
+.promo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    border-radius: 20px;
+}
+/* Для промо-карточек */
+.service-card.promo-card {
+    position: relative;
+    width: 100%;
+    height: 220px; /* фиксированная высота */
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+    .service-card.promo-card .promo-overlay {
+        position: absolute;
+        inset: 0; /* растягиваем на всю карточку */
+        background: rgba(0, 0, 0, 0.45);
+        color: #ffd700;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* важное изменение */
+        align-items: center; /* по центру по горизонтали */
+        padding: 20px;
+    }
+
+        .service-card.promo-card .promo-overlay .service-price-btn {
+            margin-top: 0; /* убираем лишний отступ */
+        }
+
+        /* Заголовок */
+        .service-card.promo-card .promo-overlay h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        /* Описание */
+        .service-card.promo-card .promo-overlay p {
+            margin: 0 0 12px 0;
+            font-size: 1rem;
+        }
+
+        
 .service-price {
     border: 1px solid #d1d5db;
     color: #374151;
@@ -426,3 +448,149 @@ input[type=number] {
         background-color: #e6ac00; /* чуть темнее при ховере */
         transform: translateY(-2px);
     }
+
+
+
+
+/* ========================================= */
+/* POLICY DOCUMENT (PREMIUM / BUSINESS)      */
+/* ========================================= */
+
+.policy-container {
+    position: relative;
+    max-width: 920px;
+    margin: 80px auto;
+    padding: 56px 52px;
+    /* glass-paper */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-radius: 18px;
+    /* outer frame */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+    /* inner "paper" frame */
+    .policy-container::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        pointer-events: none;
+    }
+
+    /* hover — подчёркиваем ДОКУМЕНТ */
+    .policy-container:hover {
+        border-color: rgba(0, 0, 0, 0.14);
+        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    }
+
+    /* ========================================= */
+    /* TYPOGRAPHY                                */
+    /* ========================================= */
+
+    .policy-container h1 {
+        font-size: 2.1rem;
+        font-weight: 800;
+        margin-bottom: 32px;
+        letter-spacing: -0.02em;
+    }
+
+    .policy-container h2 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-top: 42px;
+        margin-bottom: 14px;
+    }
+
+    .policy-container p,
+    .policy-container li {
+        font-size: 15px;
+        line-height: 1.8;
+        color: #2f2f2f;
+    }
+
+    .policy-container ul {
+        padding-left: 22px;
+        margin: 12px 0;
+    }
+
+    .policy-container li {
+        margin-bottom: 8px;
+    }
+
+    /* subtle dividers between sections */
+    .policy-container h2::before {
+        content: "";
+        display: block;
+        width: 42px;
+        height: 2px;
+        background: linear-gradient( to right, rgba(0,0,0,0.25), rgba(0,0,0,0.05) );
+        margin-bottom: 10px;
+    }
+
+    /* Links */
+    .policy-container .service-price-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 12px;
+        background-color: #ffc107; /* ярко-желтая */
+        color: #111; /* черный текст */
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .policy-container .service-price-btn:hover {
+            background-color: #e6ac00; /* чуть темнее при ховере */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .footer-link {
+    color: rgba(255,255,255,0.85);
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.4);
+    text-underline-offset: 3px;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration-color: rgba(255,255,255,0.9);
+}
+
+/* ========================================= */
+/* MOBILE                                    */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    .policy-container {
+        margin: 32px 14px;
+        padding: 32px 26px;
+    }
+
+        .policy-container::before {
+            inset: 12px;
+        }
+
+        .policy-container h1 {
+            font-size: 1.6rem;
+        }
+
+    .hero-section.hero-photo {
+        height: 45vh;
+        min-height: 300px;
+        background-position: center;
+    }
+
+    .services-section {
+        margin-top: -40px;
+        padding-top: 40px;
+        border-radius: 20px 20px 0 0;
+    }
+}

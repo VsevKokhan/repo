@@ -23,20 +23,7 @@
 </nav>
 
 <!-- Hero (остается без изменений) -->
-<header class="hero-section">
-    <div class="hero-content">
-
-        <img src="~/images/logo.png" alt="Логотип" class="hero-logo-main">
-
-        <h1 class="hero-title">Всё везём</h1>
-
-        <p class="hero-subtitle">
-            Надёжные перевозки с 2020 года.<br />
-            Ваш груз — наша забота.
-        </p>
-
-    </div>
-</header>
+<header class="hero-section hero-photo"></header>
 <!-- ========================================= -->
 <!-- SERVICES GLASS BLOCK                     -->
 <!-- ========================================= -->
@@ -150,36 +137,38 @@
     </div>
 </section>
 
-<!-- ========================================= -->
-<!-- Секция с акциями                          -->
-<!-- ========================================= -->
 <section class="promo-section py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Наши постоянно действующие предложения</h2>
+    <div class="services-container">
 
-        <div class="row justify-content-center">
+        <h2 class="services-title text-center mb-4">
+            Наши постоянно действующие предложения
+        </h2>
+
+        <div class="services-grid">
 
             @foreach (var promo in Model)
             {
-            <div class="col-12 col-sm-6 col-md-6 mb-4 d-flex justify-content-center">
-                <div class="promo-card" onclick="togglePromo(this)">
+                <div class="service-card promo-card"
+                     style="background-image: url('@promo.ImageUrl');">
 
-                    <img src="@promo.ImageUrl" class="promo-img mb-3" />
+                    <div class="promo-overlay">
+                        <h4>@promo.Text</h4>
 
-                    <p class="promo-item font-weight-bold">@promo.Text</p>
+                        <p class="mb-3">
+                            @promo.Description
+                        </p>
 
-                    <div class="promo-hover-text">
-                        @promo.Description
+                        <button class="service-price-btn">
+                            Подробнее
+                        </button>
                     </div>
 
                 </div>
-            </div>
             }
 
         </div>
     </div>
 </section>
-
 
 <!-- ========================================= -->
 <!-- Калькулятор стоимости -->
@@ -263,6 +252,7 @@
             </div>
             <div class="col-md-6 text-md-end">
                 <p>Контакты: +7 777 77 77 | Email: info@vsevezem.ru | Avito: link</p>
+                <a href="/Home/Privacy" class="footer-link">Политика конфиденциальности</a>
             </div>
         </div>
     </div>

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using RodionProject.Models;
 
 namespace RodionProject.Controllers;
@@ -18,7 +16,7 @@ public class HomeController : Controller
     {
         var promos = new List<Promo>
         {
-            new Promo { ImageUrl = "/images/photo1.png", Text = "🎁 2 грузчика бесплатно при заказе от 5 часов", Description = "Описани111111111111111111111111111111111111111111111" +
+            new Promo { ImageUrl = "/images/photo1.jpg", Text = "🎁 2 грузчика бесплатно при заказе от 5 часов", Description = "Описани111111111111111111111111111111111111111111111" +
                 "ыфв" +
                 "фыве"},
             new Promo { ImageUrl = "/images/photo2.jpg", Text = "🔥 Скидка 10% на первое обращение" , Description = "Описфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфыфы" +
@@ -33,6 +31,12 @@ public class HomeController : Controller
         };
 
         return View(promos);
+    }
+
+    public IActionResult Privacy()
+    {
+        
+        return View();
     }
 
 }

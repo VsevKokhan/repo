@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\images\\photo3.png"
     },
     {
+      "Id": "C:\\мусор\\repo\\RodionProject\\RodionProject\\wwwroot\\images\\workerback.jpg",
+      "PackagePath": "staticwebassets\\images\\workerback.jpg"
+    },
+    {
       "Id": "C:\\мусор\\repo\\RodionProject\\RodionProject\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RVzS5rqmH+OZql5CB/IFiBdLZ9krW1CK37qM2Le2GcY=",
+  "Hash": "6KtvKGhgkybY8sG9r5qdtJ6fMs8lTuoqQRr6na+SUDg=",
   "Source": "RodionProject",
   "BasePath": "_content/RodionProject",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\photo3.png"
+    },
+    {
+      "Identity": "C:\\мусор\\repo\\RodionProject\\RodionProject\\wwwroot\\images\\workerback.jpg",
+      "SourceId": "RodionProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\мусор\\repo\\RodionProject\\RodionProject\\wwwroot\\",
+      "BasePath": "_content/RodionProject",
+      "RelativePath": "images/workerback.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\workerback.jpg"
     },
     {
       "Identity": "C:\\мусор\\repo\\RodionProject\\RodionProject\\wwwroot\\js\\site.js",
